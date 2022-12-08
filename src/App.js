@@ -3,7 +3,8 @@ import "./App.css";
 import { MovieList } from "./components/MovieList";
 import { AddMovie } from "./components/AddMovie";
 import { AddColor } from "./components/AddColor";
-import { useEffect, useState } from "react";
+import { EditMovie } from "./components/EditMovie";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -16,7 +17,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 function App() {
-  const [movieList, setMovieList] = useState([]);
+  // const [movieList, setMovieList] = useState([]);
   const navigate = useNavigate();
 
   const [mode, setMode] = useState("light");
@@ -26,12 +27,12 @@ function App() {
     },
   });
 
-useEffect(() => {
-  fetch("https://63899fddc5356b25a203ee0c.mockapi.io/movies",{method: "GET"})
-    .then((data) => data.json())
-    .then((movies) => setMovieList(movies));
+// useEffect(() => {
+//   fetch("https://63899fddc5356b25a203ee0c.mockapi.io/movies",{method: "GET"})
+//     .then((data) => data.json())
+//     .then((movies) => setMovieList(movies));
 
-}, [])
+// }, [])
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -81,12 +82,16 @@ useEffect(() => {
             <Route
               path="/addmovie"
               element={
-                <AddMovie movieList={movieList} setMovieList={setMovieList} />
+                <AddMovie />
               }
             />
             <Route
               path="/movies/:id"
               element={<MovieDetails />}
+            />
+            <Route
+              path="/movies/edit/:id"
+              element={<EditMovie/>}
             />
             <Route path="/colorgame" element={<AddColor />} />
             <Route path="*" element={<NotFound />} />

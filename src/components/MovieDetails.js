@@ -6,12 +6,6 @@ import { useEffect, useState } from "react";
 export function MovieDetails() {
   const [movie, setMovie] = useState([]);
   const { id } = useParams();
-
-  const navigate = useNavigate();
-  const styles = {
-    color: movie.rating >= 8.5 ? "green" : "red",
-  };
-
   useEffect(() => {
     fetch(`https://63899fddc5356b25a203ee0c.mockapi.io/movies/${id}`, {
       method: "GET",
@@ -19,6 +13,11 @@ export function MovieDetails() {
       .then((data) => data.json())
       .then((mv) => setMovie(mv));
   }, [id]);
+
+  const navigate = useNavigate();
+  const styles = {
+    color: movie.rating >= 8.5 ? "green" : "red",
+  };
 
   return (
     <div className="movie-detail-div">

@@ -1,40 +1,57 @@
+import React from "react";
+// import IconButton from "@mui/material/IconButton";
+// import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as yup from "yup";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const movieValidationSchema = yup.object({
-  name: yup.string().required().min(4),
+  name: yup.string().required().min(1),
   poster: yup.string().required().min(8).url(),
   ratings: yup.number().required().min(0).max(10),
   summary: yup.string().required().min(20),
   trailer: yup.string().required().min(8).url(),
 });
 
-export function AddMovie() {
+export function EditMovie() {
+  const [movie, setMovie] = useState(null);
+  const { id } = useParams();
+  useEffect(() => {
+    fetch(`https://63899fddc5356b25a203ee0c.mockapi.io/movies/${id}`, {
+      method: "GET",
+    })
+      .then((data) => data.json())
+      .then((mv) => setMovie(mv));
+  }, [id]);
+  return <div>{movie?<EditMovieForm movie={movie} />:"loading"}</div>;
+}
+
+function EditMovieForm({ movie }) {
   const navigate = useNavigate();
   const { handleBlur, handleChange, values, handleSubmit, touched, errors } =
     useFormik({
       initialValues: {
-        name: "",
-        poster: "",
-        ratings: "",
-        summary: "",
-        trailer: "",
+        name: movie.name,
+        poster: movie.poster,
+        ratings: movie.ratings,
+        summary: movie.summary,
+        trailer: movie.trailer,
       },
       validationSchema: movieValidationSchema,
-      onSubmit: (values) => {
-        console.log("form values", values);
-        addMovie(values)
+      onSubmit: (updateMovie) => {
+        console.log("form values", updateMovie);
+        editMovie(updateMovie);
       },
     });
 
-  const addMovie = (values) => {
-  
-    fetch("https://63899fddc5356b25a203ee0c.mockapi.io/movies", {
-      method: "POST",
-      body: JSON.stringify(values),
+  const editMovie = (updateMovie) => {
+    fetch(`https://63899fddc5356b25a203ee0c.mockapi.io/movies/${movie.id}`, {
+      method: "PUT",
+      body: JSON.stringify(updateMovie),
       headers: { "Content-type": "application/json" },
     }).then(() => navigate("/movies"));
   };
@@ -51,9 +68,8 @@ export function AddMovie() {
         onBlur={handleBlur}
         error={touched.name && errors.name}
         helperText={touched.name && errors.name ? errors.name : null}
-        color={touched.name && errors.name?"success":"error"}
       />
-      
+
       <TextField
         label="Movie Poster url"
         variant="outlined"
@@ -65,7 +81,6 @@ export function AddMovie() {
         error={touched.poster && errors.poster}
         helperText={touched.poster && errors.poster ? errors.poster : null}
       />
-     
 
       <TextField
         label="Movie Ratings"
@@ -76,10 +91,9 @@ export function AddMovie() {
         onChange={handleChange}
         onBlur={handleBlur}
         error={touched.ratings && errors.ratings}
-        helperText=  {touched.ratings && errors.ratings ? errors.ratings : null}
-
+        helperText={touched.ratings && errors.ratings ? errors.ratings : null}
       />
-    
+
       <TextField
         label="Movie Summary"
         variant="outlined"
@@ -88,10 +102,9 @@ export function AddMovie() {
         name="summary"
         onChange={handleChange}
         onBlur={handleBlur}
-        error={touched.summary && errors.summary }
-        helperText=   {touched.summary && errors.summary ? errors.summary : null}
+        error={touched.summary && errors.summary}
+        helperText={touched.summary && errors.summary ? errors.summary : null}
       />
-      
 
       <TextField
         label="Movie Trailer url"
@@ -102,13 +115,23 @@ export function AddMovie() {
         onChange={handleChange}
         onBlur={handleBlur}
         error={touched.trailer && errors.trailer}
-        helperText=  {touched.trailer && errors.trailer ? errors.trailer : null}
+        helperText={touched.trailer && errors.trailer ? errors.trailer : null}
       />
-     
-
-      <Button variant="contained" type="submit">
-        ADD MOVIE
+      <Button variant="contained" type="submit" color="success">
+        Update MOVIE
       </Button>
     </form>
   );
 }
+
+// const Edit = () => {
+//   return (
+//     <div>
+//       <IconButton aria-label="delete">
+//         <EditIcon color="primary"/>
+//       </IconButton>
+//     </div>
+//   );
+// };
+
+// export default Edit;
