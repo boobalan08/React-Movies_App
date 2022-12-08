@@ -16,7 +16,7 @@ export function MovieDetails() {
 
   const navigate = useNavigate();
   const styles = {
-    color: movie.rating >= 8.5 ? "green" : "red",
+    color: movie.ratings >= 8.5 ? "green" : "red",
   };
 
   return (
@@ -33,7 +33,7 @@ export function MovieDetails() {
         <div className="movie-specs">
           <h2 className="movie-name">{movie.name} </h2>
           <p style={styles} className="movie-rating">
-            ⭐ {movie.rating}
+            ⭐ {movie.ratings}
           </p>
         </div>
 

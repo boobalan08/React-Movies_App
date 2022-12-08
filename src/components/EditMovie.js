@@ -1,6 +1,4 @@
 import React from "react";
-// import IconButton from "@mui/material/IconButton";
-// import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
@@ -27,7 +25,7 @@ export function EditMovie() {
       .then((data) => data.json())
       .then((mv) => setMovie(mv));
   }, [id]);
-  return <div>{movie?<EditMovieForm movie={movie} />:"loading"}</div>;
+  return <div>{movie ? <EditMovieForm movie={movie} /> : "loading"}</div>;
 }
 
 function EditMovieForm({ movie }) {
@@ -43,7 +41,6 @@ function EditMovieForm({ movie }) {
       },
       validationSchema: movieValidationSchema,
       onSubmit: (updateMovie) => {
-        console.log("form values", updateMovie);
         editMovie(updateMovie);
       },
     });
@@ -118,20 +115,10 @@ function EditMovieForm({ movie }) {
         helperText={touched.trailer && errors.trailer ? errors.trailer : null}
       />
       <Button variant="contained" type="submit" color="success">
-        Update MOVIE
+        UPDATE MOVIE
       </Button>
     </form>
   );
 }
 
-// const Edit = () => {
-//   return (
-//     <div>
-//       <IconButton aria-label="delete">
-//         <EditIcon color="primary"/>
-//       </IconButton>
-//     </div>
-//   );
-// };
 
-// export default Edit;

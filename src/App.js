@@ -17,7 +17,6 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 function App() {
-  // const [movieList, setMovieList] = useState([]);
   const navigate = useNavigate();
 
   const [mode, setMode] = useState("light");
@@ -26,13 +25,6 @@ function App() {
       mode: mode,
     },
   });
-
-// useEffect(() => {
-//   fetch("https://63899fddc5356b25a203ee0c.mockapi.io/movies",{method: "GET"})
-//     .then((data) => data.json())
-//     .then((movies) => setMovieList(movies));
-
-// }, [])
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -60,13 +52,14 @@ function App() {
                 </div>
                 <div className="theme-btn">
                   <Button
-                    startIcon={
-                      mode === "dark" ? (
-                        <Brightness7Icon />
-                      ) : (
-                        <Brightness4Icon />
-                      ) } color="inherit" onClick={() => setMode(mode === "dark" ? "light" : "dark")}>
-                    {mode === "dark" ? "light" : "dark"} MODE
+                    color="inherit"
+                    onClick={() => setMode(mode === "dark" ? "light" : "dark")}
+                  >
+                    {mode === "dark" ? (
+                      <Brightness7Icon />
+                    ) : (
+                      <Brightness4Icon />
+                    )}
                   </Button>
                 </div>
               </div>
@@ -75,24 +68,10 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route
-              path="/movies"
-              element={<MovieList />}
-            />
-            <Route
-              path="/addmovie"
-              element={
-                <AddMovie />
-              }
-            />
-            <Route
-              path="/movies/:id"
-              element={<MovieDetails />}
-            />
-            <Route
-              path="/movies/edit/:id"
-              element={<EditMovie/>}
-            />
+            <Route path="/movies" element={<MovieList />} />
+            <Route path="/addmovie" element={<AddMovie />} />
+            <Route path="/movies/:id" element={<MovieDetails />} />
+            <Route path="/movies/edit/:id" element={<EditMovie />} />
             <Route path="/colorgame" element={<AddColor />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

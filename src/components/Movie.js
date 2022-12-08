@@ -12,7 +12,7 @@ import CardContent from "@mui/material/CardContent";
 
 export function Movie({ movie, id,deleteButton,editButton }) {
   const styles = {
-    color: movie.rating >= 8.5 ? "green" : "red",
+    color: movie.ratings >= 8.5 ? "green" : "red",
   };
   const [show, setShow] = useState(true);
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ export function Movie({ movie, id,deleteButton,editButton }) {
                 </IconButton>
               </h2>
               <p style={styles} className="movie-rating">
-                ⭐ {movie.rating}
+                ⭐ {movie.ratings}
               </p>
             </div>
 

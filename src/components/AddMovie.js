@@ -26,12 +26,11 @@ export function AddMovie() {
       validationSchema: movieValidationSchema,
       onSubmit: (values) => {
         console.log("form values", values);
-        addMovie(values)
+        addMovie(values);
       },
     });
 
   const addMovie = (values) => {
-  
     fetch("https://63899fddc5356b25a203ee0c.mockapi.io/movies", {
       method: "POST",
       body: JSON.stringify(values),
@@ -51,9 +50,8 @@ export function AddMovie() {
         onBlur={handleBlur}
         error={touched.name && errors.name}
         helperText={touched.name && errors.name ? errors.name : null}
-        color={touched.name && errors.name?"success":"error"}
       />
-      
+
       <TextField
         label="Movie Poster url"
         variant="outlined"
@@ -65,7 +63,6 @@ export function AddMovie() {
         error={touched.poster && errors.poster}
         helperText={touched.poster && errors.poster ? errors.poster : null}
       />
-     
 
       <TextField
         label="Movie Ratings"
@@ -76,10 +73,9 @@ export function AddMovie() {
         onChange={handleChange}
         onBlur={handleBlur}
         error={touched.ratings && errors.ratings}
-        helperText=  {touched.ratings && errors.ratings ? errors.ratings : null}
-
+        helperText={touched.ratings && errors.ratings ? errors.ratings : null}
       />
-    
+
       <TextField
         label="Movie Summary"
         variant="outlined"
@@ -88,10 +84,9 @@ export function AddMovie() {
         name="summary"
         onChange={handleChange}
         onBlur={handleBlur}
-        error={touched.summary && errors.summary }
-        helperText=   {touched.summary && errors.summary ? errors.summary : null}
+        error={touched.summary && errors.summary}
+        helperText={touched.summary && errors.summary ? errors.summary : null}
       />
-      
 
       <TextField
         label="Movie Trailer url"
@@ -102,9 +97,8 @@ export function AddMovie() {
         onChange={handleChange}
         onBlur={handleBlur}
         error={touched.trailer && errors.trailer}
-        helperText=  {touched.trailer && errors.trailer ? errors.trailer : null}
+        helperText={touched.trailer && errors.trailer ? errors.trailer : null}
       />
-     
 
       <Button variant="contained" type="submit">
         ADD MOVIE
