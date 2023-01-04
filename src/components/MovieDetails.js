@@ -17,13 +17,12 @@ export function MovieDetails() {
 
   const navigate = useNavigate();
   const styles = {
-    color: movie.ratings >= 8.5 ? "green" : "red",
+    color: movie.rating >= 8.5 ? "green" : "red",
   };
 
   return (
     <div className="movie-detail-div">
       <div className="movie-detail-iframe">
-        {" "}
         <iframe
           className="movie-iframe"
           src={movie.trailer}
@@ -34,7 +33,7 @@ export function MovieDetails() {
         <div className="movie-specs">
           <h2 className="movie-name">{movie.name} </h2>
           <p style={styles} className="movie-rating">
-            ⭐ {movie.ratings}
+            ⭐ {movie.rating}
           </p>
         </div>
 

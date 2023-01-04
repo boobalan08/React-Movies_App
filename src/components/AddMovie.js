@@ -8,7 +8,7 @@ import { API } from "../global";
 const movieValidationSchema = yup.object({
   name: yup.string().required().min(4),
   poster: yup.string().required().min(8).url(),
-  ratings: yup.number().required().min(0).max(10),
+  rating: yup.number().required().min(0).max(10),
   summary: yup.string().required().min(20),
   trailer: yup.string().required().min(8).url(),
 });
@@ -20,7 +20,7 @@ export function AddMovie() {
       initialValues: {
         name: "",
         poster: "",
-        ratings: "",
+        rating: "",
         summary: "",
         trailer: "",
       },
@@ -66,15 +66,15 @@ export function AddMovie() {
       />
 
       <TextField
-        label="Movie Ratings"
+        label="Movie Rating"
         variant="outlined"
         type="text"
-        value={values.ratings}
-        name="ratings"
+        value={values.rating}
+        name="rating"
         onChange={handleChange}
         onBlur={handleBlur}
-        error={touched.ratings && errors.ratings}
-        helperText={touched.ratings && errors.ratings ? errors.ratings : null}
+        error={touched.rating && errors.rating}
+        helperText={touched.rating && errors.rating ? errors.rating : null}
       />
 
       <TextField
