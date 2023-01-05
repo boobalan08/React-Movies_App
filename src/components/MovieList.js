@@ -21,8 +21,8 @@ export function MovieList() {
 
   useEffect(() => getMovies(), []);
 
-  const deleteMovie = (_id) => {
-    fetch(`${API}/movies/${_id}`, {
+  const deleteMovie = (id) => {
+    fetch(`${API}/movies/${id}`, {
       method: "DELETE",
     }).then((data) => getMovies());
   };
