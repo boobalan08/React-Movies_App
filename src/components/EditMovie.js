@@ -47,7 +47,7 @@ function EditMovieForm({ movie }) {
     });
 
   const editMovie = (updateMovie) => {
-    fetch(`${API}/movies/${movie._id}`, {
+    fetch(`${API}/movies/${movie.id}`, {
       method: "PUT",
       body: JSON.stringify(updateMovie),
       headers: { "Content-type": "application/json" },
