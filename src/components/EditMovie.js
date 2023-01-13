@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { API } from "../global";
 
-const movieValidationSchema = yup.object({
+const movieVal_idationSchema = yup.object({
   name: yup.string().required().min(1),
   poster: yup.string().required().min(8).url(),
   rating: yup.number().required().min(0).max(10),
@@ -18,15 +18,15 @@ const movieValidationSchema = yup.object({
 
 export function EditMovie() {
   const [movie, setMovie] = useState(null);
-  const { id } = useParams();
+  const { _id } = useParams();
   useEffect(() => {
-    fetch(`${API}/movies/${id}`, {
+    fetch(`${API}/movies/${_id}`, {
       method: "GET",
     })
       .then((data) => data.json())
       .then((mv) => setMovie(mv));
-  }, [id]);
-  return <div>{movie ? <EditMovieForm movie={movie} /> : "loading"}</div>;
+  }, [_id]);
+  return <div>{movie ? <EditMovieForm movie={movie} /> : "loading..."}</div>;
 }
 
 function EditMovieForm({ movie }) {
@@ -40,14 +40,14 @@ function EditMovieForm({ movie }) {
         summary: movie.summary,
         trailer: movie.trailer,
       },
-      validationSchema: movieValidationSchema,
+      val_idationSchema: movieVal_idationSchema,
       onSubmit: (updateMovie) => {
         editMovie(updateMovie);
       },
     });
 
   const editMovie = (updateMovie) => {
-    fetch(`${API}/movies/${movie.id}`, {
+    fetch(`${API}/movies/${movie._id}`, {
       method: "PUT",
       body: JSON.stringify(updateMovie),
       headers: { "Content-type": "application/json" },
