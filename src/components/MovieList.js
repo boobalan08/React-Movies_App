@@ -46,7 +46,7 @@ export function MovieList() {
               editButton={
                 <IconButton
                   aria-label="delete"
-                  onClick={() => navigate(`edit/${mv._id}`)}
+                  onClick={() => navigate(`/${mv._id}`)}
                 >
                   <EditIcon color="primary" />
                 </IconButton>
