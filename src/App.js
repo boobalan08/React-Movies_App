@@ -71,7 +71,7 @@ function App() {
             <Route path="/movies" element={<MovieList />} />
             <Route path="/addmovie" element={<AddMovie />} />
             <Route path="/movies/:id" element={<MovieDetails />} />
-            <Route path="/movies/:id" element={<EditMovie />} />
+            <Route path="/movies/edit/:id" element={<EditMovie />} />
             <Route path="/colorgame" element={<AddColor />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

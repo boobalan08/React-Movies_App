@@ -18,15 +18,15 @@ const movieValidationSchema = yup.object({
 
 export function EditMovie() {
   const [movie, setMovie] = useState(null);
-  const { _id } = useParams();
+  const { id } = useParams();
   useEffect(() => {
-    fetch(`${API}/movies/${_id}`, {
+    fetch(`${API}/movies/${id}`, {
       method: "GET",
     })
       .then((data) => data.json())
       .then((mv) => setMovie(mv));
-  }, [_id]);
-  return <div>{movie ? <EditMovieForm movie={movie} /> : "loading..."}</div>;
+  }, [id]);
+  return <div>{movie ? <EditMovieForm movie={movie} /> : "loading"}</div>;
 }
 
 function EditMovieForm({ movie }) {
@@ -47,7 +47,7 @@ function EditMovieForm({ movie }) {
     });
 
   const editMovie = (updateMovie) => {
-    fetch(`${API}/movies/${movie._id}`, {
+    fetch(`${API}/movies/${movie.id}`, {
       method: "PUT",
       body: JSON.stringify(updateMovie),
       headers: { "Content-type": "application/json" },
