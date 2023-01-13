@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { API } from "../global";
 
-const movieVal_idationSchema = yup.object({
+const movieValidationSchema = yup.object({
   name: yup.string().required().min(1),
   poster: yup.string().required().min(8).url(),
   rating: yup.number().required().min(0).max(10),
@@ -40,7 +40,7 @@ function EditMovieForm({ movie }) {
         summary: movie.summary,
         trailer: movie.trailer,
       },
-      val_idationSchema: movieVal_idationSchema,
+      validationSchema: movieValidationSchema,
       onSubmit: (updateMovie) => {
         editMovie(updateMovie);
       },
